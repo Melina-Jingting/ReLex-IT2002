@@ -1,0 +1,29 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Home</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/navbar.css'%}">
+</head>
+<body>
+      <ul class="navbar">
+        <p class="logo"><img src="{%static 'images/relex_logo.png'%}"></p>
+        <span><a class="hello-msg left"> Hello {{request.user}}</a></span>
+        <li class="navbar-selections right"><a class="navbar-selections-text" href="{%url 'AppPages:logout' %}">Logout</a></li>
+        <li class="navbar-selections right"><a class="navbar-selections-text active" href="{% url 'AppPages:dashboard' %}">Dashboard</a></li>
+        <li class="navbar-selections right"><a class="navbar-selections-text" href="{% url 'AppPages:profile' %}">Profile</a></li>
+        </li>
+        <!--
+        <span class="navbar-selections"><a class = "navbar-selections-text right" href="{%url 'AppPages:logout' %}">Logout</a></span>
+        <span><a class="navbar-selections-text right"> Hello, {{request.user}}</a></span>-->
+      </ul>
+
+
+      
+</body>
+</html>
+
+  

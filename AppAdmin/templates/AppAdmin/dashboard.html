@@ -1,0 +1,385 @@
+{% load static from staticfiles %}
+{% load widget_tweaks %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Profile</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="{%static 'css/navbar.css'%}">
+
+
+</head>
+
+<body>
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <p class="logo"><img src="{%static 'images/relex_logo.png'%}"></p>
+    <span><a class="hello-msg left"> Hello {{name}}!</a></span>
+    <ul id="topheader" class="navbar " style="box-shadow: none;">
+      <li class="navbar-selections nav-item mr-auto"><a class="navbar-selections-text nav-link active"
+          href="{%url 'AppPages:dashboard' %}">Dashboard</a></li>
+      <li class="navbar-selections nav-item mr-auto"><a class="navbar-selections-text nav-link"
+          href="{%url 'AppPages:logout' %}">Logout</a></li>
+      </li>
+    </ul>
+  </nav>
+
+
+
+
+
+
+  <div class="card col-md-12 mt-5 larger-shadow" style="background-color: rgb(70, 70, 97); color: whitesmoke">
+  <div id="card card-body round " >
+    <h1 style="padding: 50px,50px;">Control Panel</h1>
+    <!--------------------------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------Companies---------------------------------->
+    <!--------------------------------------------------------------------------------------------------------------------------------->
+
+    <div id="accordion">
+      <div class="card" style="background-color:beige; box-shadow: 10px 10px gray;">
+        <div class="card-header" id="headingOne">
+          <h1 >
+            <button class="btn btn-primary col-md-11 hover" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+              aria-controls="collapseOne" style="background-color: rgb(44, 44, 87); color: whitesmoke">Companies</button>>
+          </h1>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md">
+                <div class="card card-body d-flex flex-column" style="overflow: scroll; height: 400px;">
+                  <table class="table table-sm table ">
+                    <form id="searchform" action="/admin/dashboard" method="GET">
+                      <tr>
+                        <th>
+                          <div class="col-md-4 ">
+                            <div class="row">
+                              Name
+                            </div>
+                            <div class="row form-group">
+                              <input class="rounded border-0 mt-3 form-control"
+                                style="background-color: rgb(233, 233, 233); width: 200px;" id="searchform" name="name"
+                                type="text" value="{{ companyName }}" placeholder="search by name">
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div class="row">
+                            Email
+                          </div>
+                          <div class="row">
+                          </div>
+                        </th>
+
+                        <th class="nav-item dropdown">
+                          <p>Industry</p>
+                          <div class="dropdown-container" style="position: relative;">
+                            <select name="industry" class="nav-link dropdown-toggle btn-light" id="sizeDropdown"
+                              role="button" data-toggle="dropdown">
+                              <div class="dropdown-menu" aria-labelledby="sizeDropdown" onchange="this.form.submit()"
+                                style="position: absolute; overflow: scroll; height: 200px;">
+                                {% for industry in industries%}
+                                <option class="dropdown-item">{{industry}}</option>
+                                {% endfor %}
+                              </div>
+                            </select>
+                          </div>
+                        </th>
+                        <th class="nav-item dropdown">
+                          <p>Sizes</p>
+                          <div class="dropdown-container" style="position: relative;">
+                            <select name="size" class="nav-link dropdown-toggle btn-light" id="sizeDropdown"
+                              role="button" data-toggle="dropdown">
+                              <div class="dropdown-menu" aria-labelledby="sizeDropdown"
+                                style="position: absolute; overflow: scroll; height: 200px;">
+                                {% for size in sizes %}
+                                <option class="dropdown-item">{{size}}</option>
+                                {% endfor %}
+                              </div>
+                            </select>
+                          </div>
+                        </th>
+                        <th class="nav-item dropdown">
+                          <p>Location</p>
+                          <div class="dropdown-container" style="position: relative;">
+                            <select name="location" class="nav-link dropdown-toggle btn-light" id="sizeDropdown"
+                              role="button" data-toggle="dropdown">
+                              <div class="dropdown-menu" aria-labelledby="sizeDropdown"
+                                style="position: absolute; overflow: scroll; height: 200px;">
+                                {% for location in locations %}
+                                <option class="dropdown-item">{{location}}</option>
+                                {% endfor %}
+                              </div>
+                            </select>
+                          </div>
+                        </th>
+                        <th>Jobs</th>
+                        <th>
+                          <div class="row">
+                            Update
+                          </div>
+                          <div class="row">
+                            <input class="btn btn-sm btn-md btn-info mt-3" type="submit" value="Filter"
+                              name="filterCompanies"></input>
+                          </div>
+                        </th>
+                        <th>Delete</th>
+                      </tr>
+                    </form>
+
+                    {% for company in companies %}
+
+                    <tr>
+                      <form id="entryForm" action="/admin/dashboard/" method="POST">
+                        {%csrf_token%}
+                        <td><input id="companyForm" name="name" type="text" value="{{ company.0 }}"></td>
+                        <td>{{company.1}}</td>
+                        <td><input id="companyForm" name="industry" type="text" value="{{ company.2 }}"></td>
+                        <td><input class="col-md-11" id="companyForm" name="size" type="text" value="{{ company.3 }}">
+                        </td>
+                        <td><input id="companyForm" name="location" type="text" value="{{ company.4 }}"></td>
+                        <td>{{company.5}}</td>
+                        <input type="hidden" id="companyId" name="id" value="{{company.1}}" />
+                        <td><button type="submit" class="btn btn-sm btn-info" name="update"
+                            value="company">Update</button></td>
+                        <td><button type="submit" class="btn btn-sm btn-danger" name="delete"
+                            value="company">Delete</button></td>
+                      </form>
+                    </tr>
+                    {% endfor %}
+
+                  </table>
+
+                </div>
+                <a class="btn btn-primary  btn-sm btn-block align-self-end btn-warning" href="">Add Company</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!--------------------------------------------------------------------------------------------------------------------------------->
+      <!------------------------------------------Seekers---------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------------------------->
+      <div id="accordion">
+        <div class="card" style="background-color:beige; box-shadow: 10px 10px gray;">
+          <div class="card-header" id="headingTwo">
+            <h1 class="">
+              <button class="btn col-md-11 " data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                aria-controls="collapseTwo" style="background-color: rgb(44, 44, 87); color: whitesmoke">
+                Seekers
+              </button>
+            </h1>
+          </div>
+
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md">
+                  <div class="card card-body d-flex flex-column" style="overflow: scroll; height: 400px;">
+                    <table class="table table-sm table">
+                      <form id="searchform" action="/admin/dashboard" method="GET">
+                        <tr>
+                          <th>
+                            <div class="col-md-4 ">
+                              <div class="row">
+                                Name
+                              </div>
+                              <div class="row form-group">
+                                <input class="rounded border-0 mt-3 form-control"
+                                  style="background-color: rgb(233, 233, 233); width: 200px;" id="searchform"
+                                  name="name" type="text" value="{{ companyName }}" placeholder="search by name">
+                              </div>
+                            </div>
+                          </th>
+                          <th>Email</th>
+                          <th class="nav-item dropdown">
+                            <p>Industry</p>
+                            <div class="dropdown-container" style="position: relative;">
+                              <select name="industry" class="nav-link dropdown-toggle btn-light" id="sizeDropdown"
+                                role="button" data-toggle="dropdown">
+                                <div class="dropdown-menu" aria-labelledby="sizeDropdown" onchange="this.form.submit()"
+                                  style="position: absolute; overflow: scroll; height: 200px;">
+                                  {% for industry in industries%}
+                                  <option class="dropdown-item">{{industry}}</option>
+                                  {% endfor %}
+                                </div>
+                              </select>
+                            </div>
+                          </th>
+                          <th>Skills</th>
+                          <th>Applications</th>
+                          <th>Likes</th>
+                          <th>
+                            <div class="row">
+                              Update
+                            </div>
+                            <div class="row">
+                              <input class="btn btn-sm btn-md btn-info mt-3" type="submit" value="Filter"
+                                name="filterSeekers"></input>
+                            </div>
+                          </th>
+                          <th>Delete</th>
+                        </tr>
+                      </form>
+
+                      {% for seeker in seekers %}
+
+                      <tr>
+                        <form id="entryForm" action="/admin/dashboard/" method="POST">
+                          {%csrf_token%}
+                          <td><input id="companyForm" name="name" type="text" value="{{ seeker.0 }}"></td>
+                          <td>{{seeker.1}}</td>
+                          <td><input id="companyForm" name="industry" type="text" value="{{ seeker.2 }}"></td>
+                          <td>{{seeker.3}}</td>
+                          <td>{{seeker.4}}</td>
+                          <td>{{seeker.5}}</td>
+                          <input type="hidden" id="seekerId" name="id" value="{{seeker.1}}" />
+                          <td><button type="submit" class="btn btn-sm btn-info" name="update"
+                              value="seeker">Update</button>
+                          </td>
+                          <td><button type="submit" class="btn btn-sm btn-danger" name="delete"
+                              value="seeker">Delete</button></td>
+                        </form>
+                      </tr>
+                      {% endfor %}
+
+                    </table>
+
+                  </div>
+                  <a class="btn btn-primary  btn-sm btn-block align-self-end btn-warning" href="">Add Company</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+        <!--------------------------------------------------------------------------------------------------------------------------------->
+        <!------------------------------------------Jobs---------------------------------->
+        <!--------------------------------------------------------------------------------------------------------------------------------->
+
+        <div id="accordion">
+          <div class="card" style="background-color:beige; box-shadow: 10px 10px gray;">
+            <div class="card-header" id="headingThree">
+              <h1 class="mb-0">
+                <button class="btn col-md-11" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
+                  aria-controls="collapseThree" style="background-color: rgb(44, 44, 87); color: whitesmoke">
+                  Jobs
+                </button>
+              </h1>
+            </div>
+
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md">
+                    <div class="card card-body d-flex flex-column" style="overflow: scroll; height: 400px;">
+                      <table class="table table-sm table ">
+                        <form id="searchform" action="/admin/dashboard" method="GET">
+                          <tr>
+                            <th>Company</th>
+                            <th>Title</th>
+                            <th class="nav-item dropdown">
+                              <p>Type</p>
+                              <div class="dropdown-container" style="position: relative;">
+                                <select name="type" class="nav-link dropdown-toggle btn-light" id="sizeDropdown"
+                                  role="button" data-toggle="dropdown">
+                                  <div class="dropdown-menu" aria-labelledby="sizeDropdown"
+                                    onchange="this.form.submit()"
+                                    style="position: absolute; overflow: scroll; height: 200px;">
+                                    {% for type in jobTypes%}
+                                    <option class="dropdown-item">{{type}}</option>
+                                    {% endfor %}
+                                  </div>
+                                </select>
+                              </div>
+                            </th>
+                            <th></th>
+                            <th>date_closing</th>
+                            <th>Applies</th>
+                            <th>Likes</th>
+                            <th>
+                              <div class="row">
+                                Update
+                              </div>
+                              <div class="row">
+                                <input class="btn btn-sm btn-md btn-info mt-3" type="submit" value="Filter"
+                                  name="filterJobs"></input>
+                              </div>
+                            </th>
+                            <th>Delete</th>
+                          </tr>
+                        </form>
+
+                        {% for job in jobs %}
+
+                        <tr>
+                          <form id="entryForm" action="/admin/dashboard/" method="POST">
+                            {%csrf_token%}
+                            <td>{{job.0}}</td>
+                            <td><input id="jobForm" name="title" type="text" value="{{ job.1 }}"></td>
+                            <td><input id="jobForm" name="type" type="text" value="{{ job.2 }}"></td>
+                            <td><input id="jobForm" name="date_posted" type="text" value="{{ job.3 }}"></td>
+                            <td><input id="jobForm" name="date_closing" type="text" value="{{ job.4 }}"></td>
+                            <td>{{job.5}}</td>
+                            <td>{{job.6}}</td>
+                            <input type="hidden" id="jobId" name="id" value="{{job.7}}" />
+                            <td><button type="submit" class="btn btn-sm btn-info" name="update"
+                                value="seeker">Update</button>
+                            </td>
+                            <td><button type="submit" class="btn btn-sm btn-danger" name="delete"
+                                value="seeker">Delete</button></td>
+                          </form>
+                        </tr>
+                        {% endfor %}
+
+                      </table>
+
+                    </div>
+                    <a class="btn btn-primary  btn-sm btn-block align-self-end btn-warning" href="">Add Company</a>
+                  </div>
+                </div>
+              </div>
+              <br>
+
+            </div>
+
+
+
+
+            <!--% url 'delete_order' order.id %-->
+
+            <!--===============================================================================================-->
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+            <script src="{%static 'js/main.js'%}"></script>
+
+
+
+
+
+
+</body>
+
+</html>

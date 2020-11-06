@@ -1,0 +1,53 @@
+{% extends 'AppPages/search_navbar.html' %}
+{% load static from staticfiles %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br>
+
+<div class="row">
+    <div class="col-md-11 mx-auto ">
+        <div class="card card-body" style="background-color:rgb(48, 79, 163); color: honeydew; ">
+            <h5>Found {{search_column}} similar to "{{query_string}}"</h5>
+        </div>
+        <div class="card card-body"  >
+            <form action="/seeker/job/" method="GET" accept-charset="utf-8">
+            <table class="table" >
+                <tr>
+                    <th>Company</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Industry</th>
+                    <th>Size</th>
+                    <th>Location</th>
+                    <th>Your Position</th>
+                    <th>Match Rate</th>
+                    <th>Action</th>
+                </tr>
+
+                {% for job in jobs %}
+                    <tr>
+                        <td>{{job.0}}</td>
+                        <td>{{job.1}}</td>
+                        <td>{{job.2}}</td>
+                        <td>{{job.3}}</td>
+                        <td>{{job.4}}</td>
+                        <td>{{job.5}}</td>
+                        <td>{{job.6}}</td>
+                        <td>{{job.7}}%</td>
+                        <td><!-- Use an element to toggle between a like/dislike icon -->
+                            <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
+                                
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}
+
+  

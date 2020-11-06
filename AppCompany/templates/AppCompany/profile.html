@@ -1,0 +1,57 @@
+{% extends 'AppPages/profile_navbar.html' %}
+{% load crispy_forms_tags %}
+{% load static from staticfiles %}
+
+
+{% block content %}
+<div class="row">
+    <div class="card card-body col-md-11 mt-4 mx-auto col-lg-8" style="background-color:rgb(168, 202, 216)); border-radius: 10px; box-shadow: 3px 3px;" >
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group col-6 row">
+                <h1>Name
+                    {{ s_form.name}}
+                </h1>
+            </div>
+
+            <div class="form-group col-6 row">
+                <h1>Industry
+                    {{ s_form.industry }}
+                </h1>
+                
+            </div>
+
+            <div class=" form-group col-10 mt-5 row" >
+                <h1>Skills</h1>
+                <div class="row">
+                    {% for skill in skills%}
+                    <ul class="ml-3 float-md-left">
+                        <li class="list-group-item"  style=" border-radius: 10px; box-shadow: 3px 3px;" >{{skill.0}}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+
+            <div class="form-group col-6 row ">
+                <h1></h1>
+                {{ ss_form.skill }}
+                <button type="submit" class="btn btn-success ml-2" name="add_skill" style=" border-radius: 10px; box-shadow: 3px 3px;">add</button>
+                <button type="submit" class="btn btn-danger ml-2" name="remove_skill" style=" border-radius: 10px; box-shadow: 3px 3px;">remove</button>
+                
+            </div>
+
+            {% for message in messages %}
+                <p id='messages' class='ml-2' style='color:teal;'>{{message}}</p>
+            {% endfor %}
+
+
+            <button type="submit" class="btn btn-primary mt-4" name="update" style=" border-radius: 10px; box-shadow: 3px 3px;">Save person</button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock content %}

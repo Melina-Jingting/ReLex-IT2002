@@ -1,0 +1,41 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{%static 'css/navbar.css'%}">
+
+</head>
+
+<body>
+    <nav  class="navbar navbar-toggleable-md navbar-light bg-faded">
+
+
+        <p class="logo"><img src="{%static 'images/relex_logo.png'%}"></p>
+        <span><a class="hello-msg left"> Hello {{name}}!</a></span>
+        <ul id="topheader" class="navbar"  style="box-shadow: none;">
+            <li class="navbar-selections nav-item mr-auto "><a class="navbar-selections-text nav-link active"
+                    href="{%url 'AppPages:profile' %}">Profile</a></li>
+            <li class="navbar-selections nav-item mr-auto"><a class="navbar-selections-text nav-link"
+                    href="{%url 'AppPages:dashboard' %}">Dashboard</a></li>
+            <li class="navbar-selections nav-item mr-auto"><a class="navbar-selections-text nav-link"
+                    href="{%url 'AppPages:logout' %}">Logout</a></li>
+            </li>
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+
+
+</body>
+
+</html>
